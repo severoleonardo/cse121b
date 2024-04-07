@@ -1,0 +1,59 @@
+[
+    {
+    "templeName": "Templo de Campinas",
+    "location": "Campinas, Brasil",
+    "dedicated": "2022, dezembro, 11",
+    "area": 11000,
+    "imageUrl": "https://churchofjesuschristtemples.org/assets/img/temples/campinas-brazil-temple/campinas-brazil-temple-6012-main.jpg"
+    },
+    {
+    "templeName": "Templo de Curitiba",
+    "location": "Curitiba, Brasil",
+    "dedicated": "2018, junho, 10",
+    "area": 10000,
+    "imageUrl": "https://churchofjesuschristtemples.org/assets/img/temples/curitiba-brazil-temple/curitiba-brazil-temple-1078-main.jpg"
+    },
+    {
+    "templeName": "Templo de Manaus",
+    "location": "Manaus, Brasil",
+    "dedicated:": "2019, agosto, 11",
+    "area": 10000,
+    "imageUrl": "https://churchofjesuschristtemples.org/assets/img/temples/_temp/138-Manaus-Brazil-Temple.jpg"
+    },
+    {
+    "templeName": "Templo de Porto Alegre",
+    "location": "Porto Alegre, Brasil",
+    "dedicated": "2000, dezembro, 10",
+    "area": 10000,
+    "imageUrl": "https://churchofjesuschristtemples.org/assets/img/temples/porto-alegre-brazil-temple/porto-alegre-brazil-temple-14267-main.jpg"
+    },
+    {
+    "templeName": "Templo de Recife",
+    "location": "Recife, Brasil",
+    "dedicated:": "2000, março, 12",
+    "area": 10000,
+    "imageUrl": "https://churchofjesuschristtemples.org/assets/img/temples/recife-brazil-temple/recife-brazil-temple-36778-main.jpg"
+    },
+    {
+    "templeName": "Templo de Ribeirão Preto",
+    "location": "Ribeirão Preto, Brasil",
+    "dedicated:": "2017, maio, 21",
+    "area": 10000,
+    "imageUrl": "https://churchofjesuschristtemples.org/assets/img/temples/ribeirao-preto-brazil-temple/ribeirao-preto-brazil-temple-44186-main.jpg"
+    },
+    {
+    "templeName": "Templo de São Paulo",
+    "location": "São Paulo, Brasil",
+    "dedicated:": "1978, outubro, 30",
+    "area": 11000,
+    "imageUrl": "https://churchofjesuschristtemples.org/assets/img/temples/_temp/017-S%C3%A3o-Paulo-Brazil-Temple.jpg"
+    },
+    {
+    "templeName": "Templo de Brasília",
+    "location": "Brasília, Brasil",
+    "status": "Anunciado",
+    "announced": "2022, abril, 2",
+    "imageUrl": "https://churchofjesuschristtemples.org/assets/img/temples/brasilia-brazil-temple/brasilia-brazil-temple-39184-main.jpg"
+    }
+    ]
+    
