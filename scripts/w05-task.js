@@ -58,6 +58,7 @@ const getTemples = async () => {
     }
 };
 
+
 // Test the code by calling the getTemples function
 getTemples()
     .then(() => {
@@ -82,22 +83,37 @@ const filterTemples = (temples) => {
     // Get the value of the HTML select element with ID "filtered"
     const filter = document.getElementById('filtered').value;
 
-    // Use a switch statement to filter the temples based on the selected filter
-    switch (filter) {
-        case 'utah':
-            displayTemples(temples.filter(temple => temple.location.toLowerCase().includes('utah')));
-            break;
-        case 'notutah':
-            displayTemples(temples.filter(temple => !temple.location.toLowerCase().includes('utah')));
-            break;
-        case 'older':
-            displayTemples(temples.filter(temple => new Date(temple.dedicated) < new Date(1950, 0, 1)));
-            break;
-        case 'all':
-        default:
-            displayTemples(temples);
-            break;
+    // Handle sorting option 
+    if (filter === 'alphabetical') {
+        temples.sort((a, b) => {
+            // Sort temples alphabetically by templeName
+            const nameA = a.templeName.toLowerCase();
+            const nameB = b.templeName.toLowerCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+        });
+    } else {
+        // Handle other filtering options
+        switch (filter) {
+            case 'utah':
+                temples = temples.filter(temple => temple.location.toLowerCase().includes('utah'));
+                break;
+            case 'notutah':
+                temples = temples.filter(temple => !temple.location.toLowerCase().includes('utah'));
+                break;
+            case 'older':
+                temples = temples.filter(temple => new Date(temple.dedicated) < new Date(1950, 0, 1));
+                break;
+            case 'all':
+            default:
+                // no filter applied
+                break;
+        }
     }
+    
+    // Display the filtered temples
+    displayTemples(temples);
 };
 
 
