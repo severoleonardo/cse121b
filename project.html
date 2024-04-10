@@ -11,7 +11,29 @@
         <h1>Movie Search and Recommendation App</h1>
         <input type="text" id="searchInput" placeholder="Search for a movie...">
         <button onclick="searchMovies()">Search</button>
+
+        <div id="filterContainer">
+            <label for="filterSelect">Filter by:</label>
+            <select id="filterSelect">
+                <option value="all">All Movies</option>
+                <option value="action">Action</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+            </select>
+        </div>
+        
+        <div id="sortContainer">
+            <label for="sortSelect">Sort by:</label>
+            <select id="sortSelect">
+                <option value="title">Title (A-Z)</option>
+                <option value="year">Year (ascending)</option>
+                <option value="rating">Rating (descending)</option>
+            </select>
+        </div>
+        
+        <button id="applyFiltersButton">Apply Filters</button>
     </header>
+    
     
     <main id="movieResults">
         <!-- Movie search results will be displayed here -->
@@ -28,6 +50,6 @@
         </ul>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="scripts/project.js"></script>
 </body>
 </html>
