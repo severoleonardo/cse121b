@@ -11,9 +11,11 @@ body {
 /* Header styles */
 header {
     background-color: #333;
-    color: #fff;
-    padding: 20px;
+    margin: 0;
+    
     text-align: center;
+    color: #fff;
+    padding: 30px;
 }
 
 h1 {
@@ -41,7 +43,8 @@ button {
 
 /* Main section styles */
 main {
-    padding: 20px;
+    flex-grow: 1;
+    
 }
 
 /* Movie results styles */
