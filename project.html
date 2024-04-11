@@ -3,53 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Search and Recommendation App</title>
+    <title>Cinema Time Capsule 🎬</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/navigation.css">
 </head>
 <body>
-    <header>
-        <h1>Movie Search and Recommendation App</h1>
-        <input type="text" id="searchInput" placeholder="Search for a movie...">
-        <button onclick="searchMovies()">Search</button>
-
-        <div id="filterContainer">
-            <label for="filterSelect">Filter by:</label>
-            <select id="filterSelect">
-                <option value="all">All Movies</option>
-                <option value="action">Action</option>
-                <option value="comedy">Comedy</option>
-                <option value="drama">Drama</option>
+    <nav id="mainNavigation">
+        <ul id="menu">
+            <li><a id="toggleMenu">&equiv;</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="w01-task.html">W1 Task</a></li>
+            <li><a href="w03-task.html">W3 Task</a></li>
+            <li><a href="w04-task.html">W4 Task</a></li>
+            <li><a href="w05-task.html">W5 Task</a></li>
+            <li><a href="project.html" class="active">Project</a></li>
+          </ul>
+    </nav>
+    <main>
+        <header>
+            <h1>Cinema Search and Recommendation App</h1>
+            <!-- Search bar for movie title -->
+            <input type="text" id="searchInput" placeholder="Search for a movie...">
+            <!-- Button to trigger search -->
+            <button id="searchButton">Search</button>
+    
+            <!-- Genre filter dropdown -->
+            <label for="genreFilter">or Filter by Genre:</label>
+            <select id="genreFilter">
+                <option value="">Select Genre</option>
+                <option value="28">Action</option>
+                <option value="12">Adventure</option>
+                <option value="16">Animation</option>
+                <option value="35">Comedy</option>
+                <option value="80">Crime</option>
+                <option value="99">Documentary</option>
+                <option value="18">Drama</option>
+                <option value="10751">Family</option>
+                <option value="14">Fantasy</option>
+                <option value="36">History</option>
+                <option value="27">Horror</option>
+                <option value="10402">Music</option>
+                <option value="878">Science Fiction</option>
+                <option value="10749">Romance</option>
+                <option value="53">Thriller</option>
+                <option value="10752">War</option>
             </select>
-        </div>
-        
-        <div id="sortContainer">
-            <label for="sortSelect">Sort by:</label>
-            <select id="sortSelect">
-                <option value="title">Title (A-Z)</option>
-                <option value="year">Year (ascending)</option>
-                <option value="rating">Rating (descending)</option>
-            </select>
-        </div>
-        
-        <button id="applyFiltersButton">Apply Filters</button>
-    </header>
+        </header>
+    </main>
     
     
     <main id="movieResults">
-        <!-- Movie search results will be displayed here -->
+        <!-- Movie search results are displayed here -->
     </main>
 
     <aside id="movieDetails">
-        <!-- Movie details will be displayed here when a movie is clicked -->
+        <!-- Movie details are displayed here when a movie is clicked -->
     </aside>
 
     <footer>
         <h2>Favorite Movies</h2>
         <ul id="favoritesList">
-            <!-- List of favorite movies will be displayed here -->
+            <!-- List of favorite movies are displayed here -->
         </ul>
+        &copy;<span id="year"></span> | W06 Final Project Application | CSE 121b
     </footer>
 
     <script src="scripts/project.js"></script>
+    <script>
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
 </body>
 </html>

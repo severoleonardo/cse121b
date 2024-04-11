@@ -1,9 +1,9 @@
 // Fetch and display movies based on search query
 const fetchAndDisplayMovies = async (query) => {
-    const apiKey = '3084d1f5325b50469cbd74d1b0dbac4c'; // Replace with your TMDb API key
+    const apiKey = '3084d1f5325b50469cbd74d1b0dbac4c';
     const baseUrl = 'https://api.themoviedb.org/3';
-    const searchUrl = `${baseUrl}/search/movie?api_key=${apiKey}&query=${query}`;
-
+    const searchUrl = `${baseUrl}/search/movie?api_key=${apiKey}&query=${query}&include_adult=false`; 
+    
     try {
         // Fetch movie data from TMDb API
         const response = await fetch(searchUrl);
@@ -25,6 +25,42 @@ const fetchAndDisplayMovies = async (query) => {
     }
 };
 
+// Fetch and display movies based on genre
+const fetchMoviesByGenre = async (genreId) => {
+    const apiKey = '3084d1f5325b50469cbd74d1b0dbac4c';
+    const baseUrl = 'https://api.themoviedb.org/3';
+    const genreUrl = `${baseUrl}/discover/movie?api_key=${apiKey}&with_genres=${genreId}`;
+
+    try {
+        // Fetch movie data based on genre from TMDb API
+        const response = await fetch(genreUrl);
+        
+        // Check if request was successful
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data: ${response.status}`);
+        }
+
+        
+        const data = await response.json();
+
+        // Display movies on the webpage
+        displayMovies(data.results);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        // Update UI to display error message
+        errorMessageElement.textContent = 'An error occurred while fetching movies.';
+    }
+};
+
+// Function to handle genre filter change
+const handleGenreFilterChange = () => {
+    const selectedGenreId = document.getElementById('genreFilter').value;
+    fetchMoviesByGenre(selectedGenreId);
+};
+
+// Event listener for genre filter change
+document.getElementById('genreFilter').addEventListener('change', handleGenreFilterChange);
+
 // Display movie search results on the webpage
 const displayMovies = (movies) => {
     const movieResultsElement = document.getElementById('movieResults');
@@ -34,7 +70,18 @@ const displayMovies = (movies) => {
         // Create a movie card element
         const movieCard = document.createElement('div');
         movieCard.classList.add('movie-card');
-        movieCard.textContent = movie.title;
+
+        // Create an image element for the movie poster
+        const posterUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
+        const posterImg = document.createElement('img');
+        posterImg.src = posterUrl;
+        posterImg.alt = movie.title;
+        movieCard.appendChild(posterImg);
+
+        // Create a title element for the movie
+        const titleElement = document.createElement('h2');
+        titleElement.textContent = movie.title;
+        movieCard.appendChild(titleElement);
 
         // Add click event listener to show movie details
         movieCard.addEventListener('click', () => {
@@ -64,6 +111,10 @@ const displayMovieDetails = (movie) => {
     const ratingElement = document.createElement('p');
     ratingElement.textContent = `Rating: ${movie.vote_average}`;
 
+    const posterElement = document.createElement('img');
+    posterElement.src = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
+    posterElement.alt = movie.title; 
+
     const addToFavoritesButton = document.createElement('button');
     addToFavoritesButton.textContent = 'Add to Favorites';
     addToFavoritesButton.addEventListener('click', () => {
@@ -71,71 +122,31 @@ const displayMovieDetails = (movie) => {
     });
 
     movieDetailsElement.appendChild(titleElement);
+    movieDetailsElement.appendChild(posterElement); // Append larger poster
     movieDetailsElement.appendChild(overviewElement);
     movieDetailsElement.appendChild(releaseDateElement);
     movieDetailsElement.appendChild(ratingElement);
     movieDetailsElement.appendChild(addToFavoritesButton);
 };
 
-// Filter movies by criteria
-const filterMovies = (movies, filterCriteria) => {
-    // Implement logic to filter movies based on filterCriteria
-    // Example: filter by genre
-    if (filterCriteria.genre) {
-        movies = movies.filter(movie => movie.genre.includes(filterCriteria.genre));
-    }
-    
-    // Add more filter logic as needed (e.g., release year, rating)
-
-    return movies;
-};
-
-// Example event listener for filtering
- document.getElementById('genreFilter').addEventListener('change', () => {
-     const selectedGenre = document.getElementById('genreFilter').value;
-     const filteredMovies = filterMovies(allMovies, { genre: selectedGenre });
-     displayMovies(filteredMovies);
- });
-
-// Sorte movies by criteria
-const sortMovies = (movies, sortBy) => {
-    // Implement logic to sort movies based on sortBy criteria
-    switch (sortBy) {
-        case 'title':
-            movies.sort((a, b) => a.title.localeCompare(b.title));
-            break;
-        case 'rating':
-            movies.sort((a, b) => b.rating - a.rating);
-            break;
-        case 'releaseDate':
-            movies.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-            break;
-        // Add more sorting criteria as needed
-        default:
-            break;
-    }
-
-    return movies;
-};
-
- // Example event listener for sorting
- document.getElementById('sortCriteria').addEventListener('change', () => {
-     const selectedSortBy = document.getElementById('sortCriteria').value;
-     const sortedMovies = sortMovies(allMovies, selectedSortBy);
-//     displayMovies(sortedMovies);
-// });
-
-// Add a movie to the favorites list
+// Function to add a movie to favorites
 const addToFavorites = (movie) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    favorites.push(movie);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-
-    // Update UI to reflect addition to favorites
-    const favoritesListElement = document.getElementById('favoritesList');
-    const movieItem = document.createElement('li');
-    movieItem.textContent = movie.title;
-    favoritesListElement.appendChild(movieItem);
+    
+    // Check if movie is already in favorites
+    const existingMovie = favorites.find((fav) => fav.id === movie.id);
+    if (!existingMovie) {
+        favorites.push(movie);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        
+        // Update UI to reflect addition to favorites
+        const favoritesListElement = document.getElementById('favoritesList');
+        const movieItem = document.createElement('li');
+        movieItem.textContent = movie.title;
+        favoritesListElement.appendChild(movieItem);
+    } else {
+        console.log('Movie already in favorites:', movie.title);
+    }
 };
 
 // Event listener for search button click
@@ -148,14 +159,10 @@ document.querySelector('button').addEventListener('click', () => {
 window.addEventListener('load', () => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     const favoritesListElement = document.getElementById('favoritesList');
-    
+  
     favorites.forEach((movie) => {
         const movieItem = document.createElement('li');
         movieItem.textContent = movie.title;
         favoritesListElement.appendChild(movieItem);
     });
 });
-
-
-
-

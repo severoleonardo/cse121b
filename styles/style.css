@@ -68,6 +68,15 @@ main {
     border-radius: 5px;
 }
 
+/* CSS styles for larger movie poster in movie details */
+#movieDetails img {
+    width: 250px; /* Set the desired width for the larger poster */
+    height: auto; /* Allow height to adjust automatically based on width */
+    object-fit: cover; /* Maintain aspect ratio and cover the available space */
+    border-radius: 8px; /* Optionally add rounded corners to the poster */
+    margin-bottom: 10px; /* Add space below the poster */
+}
+
 /* Footer styles */
 footer {
     background-color: #333;
